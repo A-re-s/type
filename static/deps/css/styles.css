@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono:ital@0;1&display=swap');
+:root{
+    --bgColor: #333;
+    --textPrimary: #fff;
+    --panelColor: #2c2c2c;
+    --panelText: #525252;
+    --textSecondary: #666666;
+    --primaryColor: #ffdd44; 
+    --distance: 0;
+}
+body{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--bgColor);
+    color: var(--textPrimary);
+    font-size: 2rem;
+
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none; 
+}
+
+
+#profile, #login, #logout {
+    font-size: 0.7em; /* Измените размер иконки на ваше усмотрение */
+}
+
+.navbar-brand{
+    font-size: 1.7em;
+    color: var(--primaryColor);
+} 
+
+.navbar-brand:hover{
+    color: var(--primaryColor);
+} 
+
+.nav-link{
+    color: var(--textSecondary);
+} 
+
+.nav-link:hover{
+    color: var(--textPrimary);
+} 
+
+#header{
+    color: var(--primaryColor);
+    fill: var(--primaryColor);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+#info{
+    color: var(--primaryColor);
+}
+
+
+#newGameButton {
+    cursor: pointer;
+    color: var(--textSecondary);
+    background-color: var(--bgColor);
+    border: none;
+    width: 40px;
+    outline: 0;
+    z-index: 5;
+}
+#newGameButton:hover{
+    color: var(--textPrimary);
+}
+
+
+div#typingTest{
+    line-height: 2rem;
+    width: max(70%, 400px);
+    position: relative;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+div#typingTest:focus{
+    outline: 0;
+} 
+
+#wordsContainer{
+    overflow: hidden;
+    height: 9.3rem;
+}
+#words{
+    filter: blur(6px);
+    --distance : 0;
+    color: var(--textSecondary);
+    position: relative;
+    font-size: 2.3rem;
+    line-height: 3.1rem;
+}
+#typingTest:focus #words{
+    filter: blur(0);
+}
+
+#focus-error {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    padding-top: 70px;
+}
+#typingTest:focus #focus-error  {
+    display: none;
+}
+
+div.word{
+    display: inline-block;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0 5px;
+}
+
+.letter.correct{
+    color:#fff;
+}
+.letter.incorrect{
+    color: #f55;
+}
+.letter.incorrect.extra{
+    color: rgb(173, 59, 59);
+}
+@keyframes blink {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes moveX {
+    from { transform: translateX(0); }
+    to { transform: translateX(var(--distance)); }
+
+}
+
+#cursor{
+    display: none;
+    width: 2px;
+    height: 2.5rem;
+    background: var(--primaryColor);
+    position: fixed;
+    animation: blink 1s infinite;
+
+}
+#cursor.animate {
+    animation: moveX 0.1s ease;
+    animation-fill-mode: both;  
+}
+
+#typingTest:focus #cursor{
+    display: block;
+}
+
+#typingTest.over #words{
+    opacity: .5;
+    filter: blur(0px);
+
+}
+
+#typingTest.over:focus #cursor{
+    display: none;
+}
+#typingTest.over #focus-error {
+    display: none;
+}
+
+#statsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#modePanel {
+    width:auto;
+    font-size: 1rem;
+    height: 2rem;
+    background-color: var(--panelColor);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#modePanel  .nav-link  {
+    cursor: pointer;
+    color: var(--panelText);
+}
+#modePanel  .nav-link:hover{
+    cursor: pointer;
+    color: #cdcdcd;
+}
+
+#modePanel .nav-link.active {
+    color: var(--primaryColor);
+    border-radius: 5px;
+}
+
+
+.navbar-divider {
+    width: 3px;
+    border-radius: 2px;
+    height: 1rem;
+    background-color: var(--textSecondary);
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.keyboard {
+    align-content: center;
+    font-size: 0.7em;
+    display: grid;
+    grid-template-columns: repeat(28, 20px);
+    grid-template-rows: repeat(4, 40px);
+    gap: 5px;
+    padding: 10px;   
+    padding-top: 50px;
+    border-radius: 5px;
+    justify-content: center
+    
+}
+
+.key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bgColor);
+    border: 1px solid var(--textSecondary);
+    color: var(--textSecondary);
+    border-radius: 5px;
+    grid-column: span 2;
+    height: 2.5rem;
+    min-width: 2.5rem; /* Устанавливаем минимальную ширину */
+}
+
+.key.current{
+    background-color: var(--primaryColor);
+}
+
+/* Устанавливаем ширину для конкретных клавиш */
+.tab {
+    grid-column: span 2;
+}
+
+.capsLk {
+    grid-column: span 3;
+}
+
+.shift {
+    grid-column: span 4;
+}
+
+.enter {
+    grid-column: span 3;
+}
+.space {
+    grid-column-start: 7; /* Устанавливаем начальную позицию */
+    grid-column-end: 19; /* Устанавливаем конечную позицию *//
+}
+
+.hand img{
+    width: 4rem;
+    height: auto; 
+}
+.hand{
+    position: absolute;
+}
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono:ital@0;1&display=swap');
+:root{
+    --bgColor: #333;
+    --textPrimary: #fff;
+    --panelColor: #2c2c2c;
+    --panelText: #525252;
+    --textSecondary: #666666;
+    --primaryColor: #ffdd44; 
+    --distance: 0;
+}
+body{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--bgColor);
+    color: var(--textPrimary);
+    font-size: 2rem;
+
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none; 
+}
+
+
+#profile, #login, #logout {
+    font-size: 0.7em;
+}
+
+.navbar-brand{
+    font-size: 1.7em;
+    color: var(--primaryColor);
+} 
+
+.navbar-brand:hover{
+    color: var(--primaryColor);
+} 
+
+.nav-link{
+    color: var(--textSecondary);
+} 
+
+.nav-link:hover{
+    color: var(--textPrimary);
+} 
+
+#header{
+    color: var(--primaryColor);
+    fill: var(--primaryColor);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.custom-table {
+    font-size: 1.5rem; 
+    border: none;
+    background-color: var(--panelColor);
+    border-radius: 7px;
+}
+.custom-table th, .custom-table td {
+    color: var(--primaryColor); 
+    border: none;
+    text-align: center; 
+    vertical-align: middle; 
+}
+.custom-table td {
+    color: #cdcdcd;
+}
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.custom-table tbody tr:nth-child(even) {
+    background-color: var(--panelColor); /* Цвет фона для четных строк */
+}
+
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #363535; /* Цвет фона для нечетных строк */
+}

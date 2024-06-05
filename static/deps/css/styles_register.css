@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono:ital@0;1&display=swap');
+:root{
+    --bgColor: #333;
+    --textPrimary: #fff;
+    --panelColor: #2c2c2c;
+    --panelText: #525252;
+    --textSecondary: #666666;
+    --primaryColor: #ffdd44; 
+    --distance: 0;
+}
+body{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--bgColor);
+    color: var(--textPrimary);
+    font-size: 2rem;
+
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none; 
+}
+
+
+#profile, #login, #logout {
+    font-size: 0.7em;
+}
+
+.navbar-brand{
+    font-size: 1.7em;
+    color: var(--primaryColor);
+} 
+
+.navbar-brand:hover{
+    color: var(--primaryColor);
+} 
+
+.nav-link{
+    color: var(--textSecondary);
+} 
+
+.nav-link:hover{
+    color: var(--textPrimary);
+} 
+
+#header{
+    color: var(--primaryColor);
+    fill: var(--primaryColor);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.form-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    padding: 0 50px;
+}
+.form-box {
+    width: 45%;
+    padding: 20px;
+    border: none;
+}
+.form-group input{
+    background-color: var(--panelColor);
+    color: var(--panelText);
+    border: none;
+    border-radius: 10px;
+}
+.form-group input[type="text"] {
+    color: var(--textPrimary);
+}
+
+.form-group input:focus{
+    background-color: var(--panelColor);
+    color: var(--panelText);
+    border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+    border: 1.5px solid var(--textPrimary);
+    
+}
+h2{
+    font-size: 1.5rem;
+}
+.btn{
+    background-color: var(--panelColor);
+    color: var(--textPrimary);
+    outline: 0;
+}
+.btn:hover:not([disabled]) {
+    background-color: var(--textPrimary);
+    color: var(--panelColor);
+    outline: 0;
+}
+
+
+.btn[disabled], .btn[disabled]:hover{
+    color: var(--panelText);
+}
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

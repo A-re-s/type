@@ -1,0 +1,92 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static "deps/css/styles.css" %}">
+{% endblock css %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <nav class="navbar navbar-expand" id="modePanel">
+            <div class="navbar-nav" id="modifiers">
+                <a class="nav-item nav-link" href="#" id="keyboardModifier"><i class="fa-solid fa-keyboard"></i></a>
+                <a class="nav-item nav-link" href="#" id="handModifier"><i class="fa-solid fa-hand"></i></a>
+            </div>
+            <div class="navbar-nav">
+                <div class="navbar-divider"></div>
+                <a class="nav-item nav-link" href="#" id="timeMode"><i class="fa-solid fa-clock"></i> time</a>
+                <a class="nav-item nav-link" href="#" id="wordsMode"><i class="fa-solid fa-font"></i> words</a>
+                <a class="nav-item nav-link" href="#" id="learnMode"><i class="fa-solid fa-brain"></i> learn</a>
+            </div>
+            <div class="navbar-nav" id="additional-buttons" style="display: none;">
+                <div class="navbar-divider"></div>
+                <a class="nav-item nav-link" href="#" id="cnt10">10</a>
+                <a class="nav-item nav-link" href="#" id="cnt25">25</a>
+                <a class="nav-item nav-link" href="#" id="cnt100">100</a>
+            </div>
+        </nav>
+        <div id="typingTest" class="col-12" tabindex="0">
+            <div id="cursor"></div>
+            <div id="focus-error">Click here to focus</div>
+            <div id="info"></div>
+            <div id="wordsContainer">
+                <div id="words"></div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button id="newGameButton" class="mt-5">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="keyboard" id="keyboard" style="display: none;">
+        <div class="key tab" id="key_tab">Tab</div>
+        <div class="key" id="key_q">Q</div>
+        <div class="key" id="key_w">W</div>
+        <div class="key" id="key_e">E</div>
+        <div class="key" id="key_r">R</div>
+        <div class="key" id="key_t">T</div>
+        <div class="key" id="key_y">Y</div>
+        <div class="key" id="key_u">U</div>
+        <div class="key" id="key_i">I</div>
+        <div class="key" id="key_o">O</div>
+        <div class="key" id="key_p">P</div>
+        <div class="key" id="key_[">[</div>
+        <div class="key" id="key_]">]</div>
+        <div class="key" id="key_\">\</div>
+        <div class="key capsLk" id="key_caps">Caps</div>
+        <div class="key" id="key_a">A</div>
+        <div class="key" id="key_s">S</div>
+        <div class="key" id="key_d">D</div>
+        <div class="key" id="key_f">F</div>
+        <div class="key" id="key_g">G</div>
+        <div class="key" id="key_h">H</div>
+        <div class="key" id="key_j">J</div>
+        <div class="key" id="key_k">K</div>
+        <div class="key" id="key_l">L</div>
+        <div class="key" id="key_;">;</div>
+        <div class="key" id="key_'">'</div>
+        <div class="key enter" id="key_enter">Enter</div>
+        <div class="key shift" id="key_shift">Shift</div>
+        <div class="key" id="key_z">Z</div>
+        <div class="key" id="key_x">X</div>
+        <div class="key" id="key_c">C</div>
+        <div class="key" id="key_v">V</div>
+        <div class="key" id="key_b">B</div>
+        <div class="key" id="key_n">N</div>
+        <div class="key" id="key_m">M</div>
+        <div class="key" id="key_,">,</div>
+        <div class="key" id="key_.">.</div>
+        <div class="key" id="key_/">/</div>
+        <div class="key shift" id="key_shift">Shift</div>
+        <div class="key space" id="key_ ">Space</div>
+    </div>
+    <div class="hand" id="hand" style="display: none;"><img src="{% static "deps/images/hands/right_1.png" %}" alt="" id="handImage"></i></div>
+</div>
+{% endblock content %}
+
+
+
+
