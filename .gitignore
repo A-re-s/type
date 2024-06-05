@@ -1,0 +1,9 @@
+venv/
+.pylintrc
+__pycahe__/
+
+
+.vscode
+
+db.sqlite3
+mediz/
