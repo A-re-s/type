@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "deps/css/styles_profile.css" %}">
+{% endblock css %}
+
+{% block content %}
+<div class="row mx-auto">
+    <div class="col-md-6  mx-auto">
+        <table class="table table-borderless custom-table mt-5">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-user"></i></th>
+                    <th>Symbols Typed</th>
+                    <th>Typing Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ares</td>
+                    <td>10</td>
+                    <td>0:50</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row mx-5">
+    <div class="col-md-6 mx-auto"> <!-- Центрируем содержимое в первой колонке -->
+        <table class="table table-borderless custom-table">
+            <thead>
+                <tr>
+                    <th>10 seconds</th>
+                    <th>25 seconds</th>
+                    <th>100 seconds</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 mx-auto"> <!-- Центрируем содержимое во второй колонке -->
+        <table class="table table-borderless custom-table">
+            <thead>
+                <tr>
+                    <th>10 words</th>
+                    <th>25 words</th>
+                    <th>100 words</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

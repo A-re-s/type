@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "deps/css/styles_register.css" %}">
+{% endblock css %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Форма регистрации -->
+            <div class="form-box mx-auto">
+                <h2 class="text-center">Register</h2>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control register" id="register-username" placeholder="username">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control register" id="register-email" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control register"" id="register-password" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control register"" id="verify-password" placeholder="verify password">
+                    </div>
+                    <button type="submit" class="btn btn-block" id="register-button" disabled><i class="fa-solid fa-user-plus"></i> Sign Up</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Форма входа -->
+            <div class="form-box mx-auto">
+                <h2 class="text-center">Login</h2>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control login" id="login-email" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control login" id="login-password" placeholder="password">
+                    </div>
+                    <button type="submit" class="btn btn-block" id="login-button" disabled><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block script %} 
+<script src="{% static "deps/js/register_scripts.js" %}"></script>
+{% endblock script %}
+
