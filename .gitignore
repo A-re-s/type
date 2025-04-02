@@ -4,6 +4,7 @@ __pycahe__/
 
 
 .vscode
+.env
 
 db.sqlite3
-mediz/
+media/

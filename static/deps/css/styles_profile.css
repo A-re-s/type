@@ -39,7 +39,22 @@ body{
 .nav-link{
     color: var(--textSecondary);
 } 
+.nav-link.verified{
+    color: #2c9d1b;
 
+}
+.nav-link.not_verified{
+    color: #a42525;
+
+}
+.nav-link.verified:hover{
+    color: #236818;
+
+}
+.nav-link.not_verified:hover{
+    color: #531515;
+
+}
 .nav-link:hover{
     color: var(--textPrimary);
 } 

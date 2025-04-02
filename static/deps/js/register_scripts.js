@@ -1,4 +1,3 @@
-
 let bgColor = '#333333';
 let textPrimary = '#ffffff';
 let panelColor = '#2c2c2c';
@@ -10,7 +9,7 @@ var register = document.querySelectorAll('.register');
 var login = document.querySelectorAll('.login');
 
 function validateEmail(email) {
-    const re = /^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return re.test(email);
 }
 
@@ -18,7 +17,7 @@ function validatePassword(password) {
     if (password.length <= 5) {
         return false;
     }
-    
+
     if (!/\d/.test(password)) {
         return false;
     }
@@ -39,33 +38,26 @@ register.forEach(function(input) {
             this.style.borderColor = panelText;
         }
 
-        const passwordInput = document.getElementById("register-password");
-        const verifyPasswordInput = document.getElementById("verify-password");
-        const usernameInput = document.getElementById("register-username");
-        const emaiInput = document.getElementById("register-email");
+        const passwordInput = document.getElementById("id_password1");
+        const verifyPasswordInput = document.getElementById("id_password2");
+        const usernameInput = document.getElementById("id_username");
+        const emailInput = document.getElementById("id_email");
         const registerButton = document.getElementById("register-button");
 
         const isValidPassword = validatePassword(passwordInput.value);
-        const isValidEmail = validateEmail(emaiInput.value);
+        const isValidEmail = validateEmail(emailInput.value);
         const passwordsMatch = passwordInput.value === verifyPasswordInput.value;
-        const isEmptyUsername = usernameInput.value !=="";
-        
-        if (this.id === "register-email") {    
-            this.style.border= "1.5px solid " + (isValidEmail ? textPrimary : 'red');
-            
-        } else if (this.id === "register-password" || this.id === "verify-password") {
-            passwordInput.style.border= "1.5px solid " + ((isValidPassword && passwordsMatch) ? textPrimary : 'red');
-            verifyPasswordInput.style.border= "1.5px solid " + ((isValidPassword && passwordsMatch) ? textPrimary : 'red');
-        } else if (this.id === "register-username") {
-            if (this.value !== ""){
-                this.style.border= "1.5px solid " + textPrimary;
-            }
-            else{
-                this.style.border= "1.5px solid " + 'red';
-            }
+        const isEmptyUsername = usernameInput.value !== "";
+
+        if (this.id === "id_email") {
+            this.style.border = "1.5px solid " + (isValidEmail ? textPrimary : 'red');
+        } else if (this.id === "id_password1" || this.id === "id_password2") {
+            passwordInput.style.border = "1.5px solid " + ((isValidPassword && passwordsMatch) ? textPrimary : 'red');
+            verifyPasswordInput.style.border = "1.5px solid " + ((isValidPassword && passwordsMatch) ? textPrimary : 'red');
+        } else if (this.id === "id_username") {
+            this.style.border = "1.5px solid " + (isEmptyUsername ? textPrimary : 'red');
         }
         registerButton.disabled = !isValidPassword || !isValidEmail || !passwordsMatch || !isEmptyUsername;
-
     });
 });
 
@@ -79,20 +71,18 @@ login.forEach(function(input) {
             this.style.borderColor = panelText;
         }
 
-        const passwordInput = document.getElementById("login-password");
-        const emailInput = document.getElementById("login-email");
-        const loginButton = document.getElementById("login-button")
+        const passwordInput = document.getElementById("id_password");
+        const usernameInput = document.getElementById("id_username_");
+        const loginButton = document.getElementById("login-button");
 
-        const isValidPassword = validatePassword(passwordInput.value);
-        const isValidEmail = validateEmail(emailInput.value);
+        const isValidPassword = passwordInput.value.trim() !== "";
+        const isValidUsername = usernameInput.value.trim() !== "";
 
-        
-        if (this.id === "login-email") {    
-            this.style.border= "1.5px solid " + (isValidEmail ? textPrimary : 'red');
-        } else if (this.id === "login-password") {
-            passwordInput.style.border= "1.5px solid " + (isValidPassword  ? textPrimary : 'red');
+        if (this.id === "id_username_") {
+            this.style.border = "1.5px solid " + (isValidUsername ? textPrimary : 'red');
+        } else if (this.id === "id_password") {
+            this.style.border = "1.5px solid " + (isValidPassword ? textPrimary : 'red');
         }
-        loginButton.disabled = !isValidPassword || !isValidEmail;
-
+        loginButton.disabled = !isValidPassword || !isValidUsername;
     });
 });

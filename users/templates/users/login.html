@@ -12,20 +12,34 @@
             <!-- Форма регистрации -->
             <div class="form-box mx-auto">
                 <h2 class="text-center">Register</h2>
-                <form>
+                <form action="{% url "user:login" %}" method="post">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control register" id="register-username" placeholder="username">
+                        <input type="text" name="username"
+                        class="form-control register" id="id_username" placeholder="username">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control register" id="register-email" placeholder="email">
+                        <input type="email" name="email"
+                        class="form-control register" id="id_email" placeholder="email">
+                        {% if form.email.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control register"" id="register-password" placeholder="password">
+                        <input type="password" name="password1"
+                        class="form-control register" id="id_password1" placeholder="password">
+                        {% if form.password1.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control register"" id="verify-password" placeholder="verify password">
+                        <input type="password" name="password2"
+                        class="form-control register" id="id_password2" placeholder="verify password">
+                        {% if form.password2.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.password2.errors}}</div>
+                        {% endif %}
                     </div>
-                    <button type="submit" class="btn btn-block" id="register-button" disabled><i class="fa-solid fa-user-plus"></i> Sign Up</button>
+                    <button name="register" type="submit" class="btn btn-block" id="register-button" disabled><i class="fa-solid fa-user-plus"></i> Sign Up</button>
                 </form>
             </div>
         </div>
@@ -33,15 +47,22 @@
             <!-- Форма входа -->
             <div class="form-box mx-auto">
                 <h2 class="text-center">Login</h2>
-                <form>
+                <form action="{% url "user:login" %}" method="post">
+                    {% csrf_token %}
+
                     <div class="form-group">
-                        <input type="email" class="form-control login" id="login-email" placeholder="email">
+                        <input type="text" class="form-control login" name="username" id="id_username_"  placeholder="username" required>
+
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control login" id="login-password" placeholder="password">
+                        <input type="password" class="form-control login" name="password" id="id_password" placeholder="password" required>
+                        {% if form.password.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.password.errors}}</div>
+                        {% endif %}
                     </div>
-                    <button type="submit" class="btn btn-block" id="login-button" disabled><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
-                </form>
+                    <button name="login" type="submit" class="btn btn-block" id="login-button" disabled ><i class="fa-solid fa-right-to-bracket"></i> Sign In</button> 
+               
+                </form> 
             </div>
         </div>
     </div>

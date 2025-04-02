@@ -1,6 +1,8 @@
 let typeWords = [];
 wordsCount = 50;
 gameTime = 10;
+lettersTyped = 0;
+errorCnt = 0;
 
 let mode = 0;
 let gameTimer = null;
@@ -78,6 +80,9 @@ function set_hand(){
     handImg.src = `static/deps/images/hands/${hand_type}_${finger}.png`;;
 }
 function newGame() {
+    updateProfile();
+    lettersTyped = 0;
+    errorCnt = 0;
     pauseTime = 0;
     pauseStart = null;
 
@@ -125,6 +130,43 @@ function newGame() {
     set_hand();
 }
 
+
+
+
+function updateProfile() {
+    wpm = getWpm();
+    if (lettersTyped === 0) return;
+    var newGameButton = $('#newGameButton');
+    var url = newGameButton.data('url'); 
+    var csrfToken = $("[name=csrfmiddlewaretoken]").val();
+    var data = {
+        csrfmiddlewaretoken: csrfToken,
+        lettersTyped: lettersTyped
+    };
+    lettersTyped = 0;
+    if (mode !== 2) {
+        data.wpm = wpm;
+        data.accuracy = getAccuracy()*100;
+        data.error_cnt = errorCnt;
+        data.mode = (mode === 1 ? "words"  + wordsCount : "time" + gameTime);
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (data) {
+            // Обработка успешного ответа
+        },
+        error: function (data) {
+            console.log("Ошибка при добавлении символов");
+        },
+    });
+}
+
+
+
+
 function getWpm() {
     const words = [...document.querySelectorAll('.word')];
     const lastTypedWord = document.querySelector('.word.current');
@@ -134,7 +176,9 @@ function getWpm() {
         letters = [...word.children];
         letters.splice(letters.length -1, 1);
         const incorrectLetters = letters.filter(letter => letter.className.includes('incorrect'));
+        errorCnt += incorrectLetters.length;
         const correctLetters = letters.filter(letter => letter.className.includes('correct'));
+        lettersTyped += correctLetters.length;
         return incorrectLetters.length === 0 && correctLetters.length === letters.length;
     });
     const currentTime = (new Date()).getTime();
@@ -150,6 +194,7 @@ function getAccuracy() {
 }
 
 function gameOver() {
+
     clearInterval(gameTimer);
     const keys = [...document.querySelectorAll('.key')]
     keys.forEach(key => {
@@ -160,6 +205,7 @@ function gameOver() {
     cursor = document.getElementById('cursor');
     cursor.classList = '';
     addClass(document.getElementById('typingTest'), 'over');
+    updateProfile();
     document.getElementById('info').innerHTML =
         `<div id="statsContainer">
                     <div id="wpm"> WPM: ${getWpm()}</div>
@@ -442,7 +488,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     wordsBtn.addEventListener('click', () => {
         toggleAdditionalButtons(true);
-        mode = 1;
+
+        
         if (timeBtn.classList.contains('active')) {
             if (cnt10.classList.contains('active')) {
                 wordsCount = 10;
@@ -456,10 +503,13 @@ document.addEventListener('DOMContentLoaded', () => {
             else {
                 wordsCount = 10;
             }
+            mode = 1;
             if (!wordsBtn.classList.contains('active') ) newGame();
             setActiveButton([wordsBtn], [learnBtn, wordsBtn, timeBtn]);
         }
         else if (learnBtn.classList.contains('active')) {
+            updateProfile();
+            mode = 1;
             wordsCount = 10;
             if (!wordsBtn.classList.contains('active') ) newGame();
             setActiveButton([wordsBtn, cnt10], [learnBtn, wordsBtn, timeBtn, cnt10, cnt25, cnt100]);
@@ -469,8 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     timeBtn.addEventListener('click', () => {
         toggleAdditionalButtons(true);
-        wordsCount = 50;
-        mode = 0;
+        
         if (wordsBtn.classList.contains('active')) {
             if (cnt10.classList.contains('active')) {
                 gameTime = 10;
@@ -484,11 +533,16 @@ document.addEventListener('DOMContentLoaded', () => {
             else {
                 gameTime = 10;
             }
+            wordsCount = 50;
+             mode = 0;
             if (!timeBtn.classList.contains('active') ) newGame();
             setActiveButton([timeBtn], [learnBtn, wordsBtn, timeBtn]);
 
         }
         else if (learnBtn.classList.contains('active')) {
+            updateProfile();
+            wordsCount = 50;
+             mode = 0;
             gameTime = 10;
             if (!timeBtn.classList.contains('active') ) newGame();
             setActiveButton([timeBtn, cnt10], [learnBtn, wordsBtn, timeBtn, cnt10, cnt25, cnt100]);
@@ -556,7 +610,6 @@ async function getWords(cnt, len) {
         getWords(100, 6)
     ]).then(([words1, words2, words3]) => {
         typeWords = [...words1, ...words2, ...words3];
-        console.log(typeWords);
         newGame();
     });
 })();

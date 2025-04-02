@@ -18,12 +18,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Ares</td>
-                    <td>10</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.symbols_typed}}</td>
                     <td>0:50</td>
                 </tr>
             </tbody>
         </table>
+        
     </div>
 </div>
 <div class="row mx-5">
@@ -65,4 +66,49 @@
     </div>
 </div>
 
+<div class="row mx-auto">
+    <div class="col-md-6  mx-auto">
+        <table class="table table-borderless custom-table">
+            <thead>
+                <tr>
+                    <th>mode</th>
+                    <th>date</th>
+                    <th>WPM</th>
+                    <th>ACC</th>
+                    <th>ERR</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for attemp in attemps %}
+                <tr>
+                    <td>{{attemp.mode}}</td>
+                    <td>{{attemp.attemp_time}}</td>
+                    <td>{{attemp.wpm}}</td>
+                    <td class="accur">{{attemp.accuracy}}%</td>
+                    <td>{{attemp.error_cnt}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock content %}
+
+{% block buttons %}
+
+<li class="nav-item">           
+    <a class="nav-link {% if not telegram_id %} not_verified {% else %}verified {% endif %}" id="link_telegram" 
+    {% if not telegram_id %} href=" {% url "users:link_telegram" %}" target="_blank" {% else %}href="{% url "users:unlink_telegram" %}" {% endif %}" >
+        <i class="fa-brands fa-telegram"></i>
+    </a>
+</li>
+
+<li class="nav-item my-auto">                
+    <a class="nav-link " id="logout" href="{% url "users:logout" %}">
+        <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
+</li>
+{% endblock buttons %}
+{% block script %} 
+<script src="{% static "deps/js/profile.js" %}"></script>
+{% endblock script %}

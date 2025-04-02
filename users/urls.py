@@ -25,4 +25,7 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('profile/', views.profile, name='profile'),
+    path('update_profile/', views.add_symbols, name='update_profile'),
+    path('link_telegram/', views.link_telegram, name='link_telegram'),
+    path('unlink_telegram/', views.unlink_telegram, name='unlink_telegram'),
 ]
